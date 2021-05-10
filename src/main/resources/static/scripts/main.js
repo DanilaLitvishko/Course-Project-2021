@@ -44,12 +44,14 @@ Vue.component('employees-form',{
         save: function (){
             var employee = {surname : this.surname, firstname: this.firstname, position: this.position,
                 nameOfSocialNetwork: this.nameOfSocialNetwork, nameOfAction: this.nameOfAction, nameOfCompany: this.nameOfCompany};
-            if(this.id){
-                employeeApi.update({id:this.id}, message).then(result=>result.json().then(data=> {
-                    var index = getIndex(this.messages, data.id)
-                    this.messages.splice(index, 1, data)
-                    this.name = ''
-                    this.id = ''
+            if(this.surname){
+                employeeApi.update({surname : this.surname, firstname: this.firstname, position: this.position,
+                    nameOfSocialNetwork: this.nameOfSocialNetwork, nameOfAction: this.nameOfAction, nameOfCompany: this.nameOfCompany}
+                    , employee).then(result=>result.json().then(data=> {
+                        var index = getIndex(this.messages, data.id)
+                        this.messages.splice(index, 1, data)
+                        this.name = ''
+                        this.id = ''
                 }))
             }
             else{
@@ -95,7 +97,7 @@ Vue.component('employees-list', {
     props:['employees', 'socialNetworks', 'acts', 'companys'],
     data: function (){
         return {
-            message: null
+            employee: null
         }
     },
     template: '<div style="position: relative; width: 1100px"> ' +
@@ -103,8 +105,8 @@ Vue.component('employees-list', {
         '<employee-row v-for="employee in employees" :employee="employee" :editMethod="editMethod" :employees="employees"/>' +
         '</div>',
     methods:{
-        editMethod: function (message){
-            this.message = message
+        editMethod: function (employee){
+            this.employee = employee
         }
     }
 });
@@ -158,7 +160,7 @@ Vue.component('company-row',{
             this.editMethod(this.employee)
         },
         del: function () {
-            companyApi.remove({surname: this.companys.name}).then(result=>{
+            companyApi.remove({name: this.companys.name}).then(result=>{
                 if(result.ok){
                     //this.messages.splice(this.messages.indexOf(this.message), 1)
                 }
@@ -228,7 +230,7 @@ Vue.component('act-row',{
             this.editMethod(this.employee)
         },
         del: function () {
-            actApi.remove({surname: this.acts.name}).then(result=>{
+            actApi.remove({name: this.acts.name}).then(result=>{
                 if(result.ok){
                     //this.messages.splice(this.messages.indexOf(this.message), 1)
                 }

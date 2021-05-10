@@ -1,9 +1,7 @@
 package com.example.rest.controllers;
 
 import com.example.rest.domain.Act;
-import com.example.rest.domain.Company;
 import com.example.rest.repo.ActRepo;
-import com.example.rest.repo.CompanyRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

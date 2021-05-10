@@ -1,8 +1,6 @@
 package com.example.rest.controllers;
 
-import com.example.rest.domain.Employee;
 import com.example.rest.domain.Output;
-import com.example.rest.repo.EmployeeRepo;
 import com.example.rest.repo.OutputRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
